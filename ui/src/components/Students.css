@@ -1,0 +1,14 @@
+/* .student-node {
+   
+    font-weight: bold;
+} */
+
+.student-node:hover {
+    height: '250px';
+    width: '250px';
+    font-weight: bolder;
+}
+
+#node {
+    background: red;    
+}
