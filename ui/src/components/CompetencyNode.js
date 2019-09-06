@@ -17,19 +17,7 @@ export class CompetencyNode extends Component {
                     <PercentageCircle
                         name={'total comptency score'}
                         totalLevel={totalLevel}
-                        size={'small'}
-                        color={color}
-                    />
-                    <PercentageCircle
-                        name={'total comptency score'}
-                        totalLevel={totalLevel}
-                        size={'small'}
-                        color={color}
-                    />
-                    <PercentageCircle
-                        name={'total comptency score'}
-                        totalLevel={totalLevel}
-                        size={'small'}
+                        size={''}
                         color={color}
                     />
                 </Link>
