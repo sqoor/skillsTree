@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const {getAll, auth} = require("./database");
+const {getStudents, addStudent, auth} = require("./database");
 
 const app = express();
 app.use(express.json());
@@ -8,13 +8,22 @@ app.use(cors());
 
 
 app.get('/', (req, res) => {
-  res.json('server is working');
+  res.json('TEST: server is working');
 });
 
-app.get('/data', (req, res) => {
+app.get('/data', async (req, res) => {
   console.log('GET: /data')
 
-  res.json(getAll());
+  res.json(await getStudents());
+});
+
+app.post('/data', async (req, res) => {
+  const newStudent = req.body;
+  console.log('POST: /data', newStudent)
+
+  const result = await addStudent(newStudent);
+
+  res.json(result);
 });
 
 app.post('/login', (req, res) => {
@@ -23,9 +32,6 @@ app.post('/login', (req, res) => {
 
   res.json(result);
 });
-
-
-
 
 
 const PORT = process.env.PORT || 9000;

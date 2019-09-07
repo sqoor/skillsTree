@@ -22,9 +22,15 @@ export class AdminPage extends Component {
         this.setState({ wantAddNew: !this.state.wantAddNew })
     }
 
-
+    submitStudent = (newStudent) => {
+        console.log('submit student', newStudent)
+        Axios.post('/data', newStudent)
+            .then(res => this.setState({data: res.data}))
+            .catch(err => console.log(err));
+    }
 
     render() {
+        const { submitStudent } = this;
         const { data, wantAddNew } = this.state;
 
         return (
@@ -89,18 +95,18 @@ export class AdminPage extends Component {
                             </tr>
                         </thead>
                         <tbody className="">
-                            {/* {data.length ? 
+                            {data.length ? 
                                 data.map((obj, i) => (
                                     <Row
-                                        key={obj.student.id}
+                                        key={obj._id}
                                         number={i + 1}
                                         student={obj.student}
                                         comp={obj.comp}
                                     />))
                                 :
                                 null
-                            } */}
-                            <AddNew hidden={wantAddNew} />
+                            }
+                            <AddNew hidden={wantAddNew} submitStudent={submitStudent} />
                         </tbody>
                     </table>
                 </div>

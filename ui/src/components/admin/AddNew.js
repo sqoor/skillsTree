@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 
 export class AddNew extends Component {
     state = {
-        name: '',
+        student: {
+            // id: '',
+            // name: ''
+        },
         comp: [
             // {
             //     id: 0,
@@ -22,8 +25,7 @@ export class AddNew extends Component {
         const inputName = input.name.split(' ');
 
         if (inputName.length === 1 && inputName[0] === 'name') {
-            this.setState({ name: inputValue });
-
+            this.setState({ student: { name: inputValue } });
             return;
         }
 
@@ -38,17 +40,17 @@ export class AddNew extends Component {
         }
 
         const compExists = this.state.comp.reduce((result, existedComp) => {
-            if(existedComp.id === newComp.id) return result + 1;
+            if (existedComp.id === newComp.id) return result + 1;
             return result + 0;
-        }, 0) 
+        }, 0)
 
         if (compExists) {
             this.setState({
                 comp: this.state.comp.map(comp => {
                     if (comp.id === newComp.id) {
                         comp.level.one = inputName[3] === 'one' ? inputValue : comp.level.one;
-                        comp.level.two =  inputName[3] === 'two' ? inputValue : comp.level.two;
-                        comp.level.three =  inputName[3] === 'three' ? inputValue : comp.level.three;
+                        comp.level.two = inputName[3] === 'two' ? inputValue : comp.level.two;
+                        comp.level.three = inputName[3] === 'three' ? inputValue : comp.level.three;
                     }
                     return comp
                 })
@@ -56,7 +58,7 @@ export class AddNew extends Component {
 
             return;
         }
-        
+
         this.setState({
             comp: [...this.state.comp, newComp]
         })
@@ -65,12 +67,11 @@ export class AddNew extends Component {
 
 
     submitHandler = (e) => {
-        if((e.type === 'keyup' && e.keyCode === 13))
-            
-            
-        console.log('submited')
-        
-        console.log('this.state', this.state);
+        const pressedEnter = e.type === 'keyup' && e.keyCode === 13
+
+        if (!pressedEnter) return;
+
+        this.props.submitStudent(this.state);
     }
 
     render() {
@@ -81,45 +82,46 @@ export class AddNew extends Component {
             <tr style={{ visibility }}>
                 <th scope="row">#</th>
                 <td>
-                    <input 
-                        name="name" 
-                        onChange={changeHandler} 
-                        type="text" 
-                        required 
+                    <input
+                        name="name"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="text"
+                        required
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp1 1 level one" 
-                        onKeyUp={submitHandler} 
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                    <input
+                        name="comp1 1 level one"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp1 1 level two" 
-                        onKeyUp={submitHandler} 
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                    <input
+                        name="comp1 1 level two"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                    name="comp1 1 level three" 
-                    onKeyUp={submitHandler} 
-                    onChange={changeHandler} 
-                    type="number" 
-                    min="0" 
-                    max="100" 
+                    <input
+                        name="comp1 1 level three"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
+                    <input
                         name="comp2 2 level one"
                         onKeyUp={submitHandler}
                         onChange={changeHandler}
@@ -129,211 +131,211 @@ export class AddNew extends Component {
                     />
                 </td>
                 <td>
-                    <input 
+                    <input
                         name="comp2 2 level two"
-                        onKeyUp={submitHandler} 
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100"
-                    />
-                </td>
-                <td>
-                    <input 
-                        name="comp2 2 level three"
                         onKeyUp={submitHandler}
                         onChange={changeHandler}
-                        type="number" 
-                        min="0" 
-                        max="100" 
-                    />
-                </td>
-                <td>
-                    <input 
-                        name="comp3 3 level one"
-                        onKeyUp={submitHandler} 
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
-                    />
-                </td>
-                <td>
-                    <input 
-                        name="comp3 3 level two"
-                        onKeyUp={submitHandler} 
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
-                    />
-                </td>
-                <td>
-                    <input 
-                        name="comp3 3 level three"
-                        onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
+                        type="number"
+                        min="0"
                         max="100"
-                    />
-                </td>
-                <td>
-                    <input 
-                        name="comp4 4 level one" 
-                        onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
                     />
                 </td>
                 <td>
                     <input
-                        name="comp4 4 level two" 
+                        name="comp2 2 level three"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp4 4 level three" 
+                    <input
+                        name="comp3 3 level one"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp5 5 level one" 
+                    <input
+                        name="comp3 3 level two"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp5 5 level two" 
+                    <input
+                        name="comp3 3 level three"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp5 5 level three" 
+                    <input
+                        name="comp4 4 level one"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp6 6 level one" 
+                    <input
+                        name="comp4 4 level two"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp6 6 level two" 
+                    <input
+                        name="comp4 4 level three"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp6 6 level three" 
+                    <input
+                        name="comp5 5 level one"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp7 7 level one" 
+                    <input
+                        name="comp5 5 level two"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp7 7 level two" 
+                    <input
+                        name="comp5 5 level three"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp7 7 level three" 
+                    <input
+                        name="comp6 6 level one"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp8 8 level one" 
+                    <input
+                        name="comp6 6 level two"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp8 8 level two" 
+                    <input
+                        name="comp6 6 level three"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        name="comp8 8 level three" 
+                    <input
+                        name="comp7 7 level one"
                         onKeyUp={submitHandler}
-                        onChange={changeHandler} 
-                        type="number" 
-                        min="0" 
-                        max="100" 
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
                     />
                 </td>
                 <td>
-                    <input 
-                        onClick={submitHandler} 
-                        className="btn btn-sm btn-outline-danger" 
-                        type="button" 
-                        value="Save" 
+                    <input
+                        name="comp7 7 level two"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input
+                        name="comp7 7 level three"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input
+                        name="comp8 8 level one"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input
+                        name="comp8 8 level two"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input
+                        name="comp8 8 level three"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input
+                        onClick={submitHandler}
+                        className="btn btn-sm btn-outline-danger"
+                        type="button"
+                        value="Save"
                     />
                 </td>
             </tr>
