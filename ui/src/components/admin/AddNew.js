@@ -70,7 +70,7 @@ export class AddNew extends Component {
             
         console.log('submited')
         
-        console.log(this.state);
+        console.log('this.state', this.state);
     }
 
     render() {
@@ -80,32 +80,262 @@ export class AddNew extends Component {
         return (
             <tr style={{ visibility }}>
                 <th scope="row">#</th>
-                <td><input name="name" onChange={changeHandler} type="text" required /></td>
-                <td><input name="comp1 1 level one" onKeyUp={submitHandler} onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp1 1 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp1 1 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp2 2 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp2 2 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp2 2 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp3 3 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp3 3 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp3 3 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp4 4 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp4 4 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp4 4 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp5 5 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp5 5 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp5 5 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp6 6 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp6 6 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp6 6 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp7 7 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp7 7 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp7 7 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp8 8 level one" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp8 8 level two" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input name="comp8 8 level three" onChange={changeHandler} type="number" min="0" max="100" /></td>
-                <td><input onClick={submitHandler} className="btn btn-sm btn-outline-danger" type="button" value="Save" /></td>
+                <td>
+                    <input 
+                        name="name" 
+                        onChange={changeHandler} 
+                        type="text" 
+                        required 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp1 1 level one" 
+                        onKeyUp={submitHandler} 
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp1 1 level two" 
+                        onKeyUp={submitHandler} 
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                    name="comp1 1 level three" 
+                    onKeyUp={submitHandler} 
+                    onChange={changeHandler} 
+                    type="number" 
+                    min="0" 
+                    max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp2 2 level one"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number"
+                        min="0"
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp2 2 level two"
+                        onKeyUp={submitHandler} 
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp2 2 level three"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler}
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp3 3 level one"
+                        onKeyUp={submitHandler} 
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp3 3 level two"
+                        onKeyUp={submitHandler} 
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp3 3 level three"
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100"
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp4 4 level one" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input
+                        name="comp4 4 level two" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp4 4 level three" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp5 5 level one" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp5 5 level two" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp5 5 level three" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp6 6 level one" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp6 6 level two" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp6 6 level three" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp7 7 level one" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp7 7 level two" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp7 7 level three" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp8 8 level one" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp8 8 level two" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        name="comp8 8 level three" 
+                        onKeyUp={submitHandler}
+                        onChange={changeHandler} 
+                        type="number" 
+                        min="0" 
+                        max="100" 
+                    />
+                </td>
+                <td>
+                    <input 
+                        onClick={submitHandler} 
+                        className="btn btn-sm btn-outline-danger" 
+                        type="button" 
+                        value="Save" 
+                    />
+                </td>
             </tr>
         )
     }
