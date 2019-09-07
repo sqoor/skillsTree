@@ -13,12 +13,27 @@ db.once('open', function () {
 });
 
 
+const auth = (user) => {
+  console.log('auth', user);
+
+  const dbUser =  {
+    name: 'mo.jouza',
+    password: '1234567'
+  };
+
+  if(user.name === dbUser.name && user.password === dbUser.password)
+    return true;
+
+  return false;
+}
+
+
 const getAll = () => {
-  console.log('getAll', Array.isArray(data));
   return data;
 }
 
 module.exports = {
-  getAll
+  getAll,
+  auth
 }
 

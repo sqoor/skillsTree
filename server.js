@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./database");
+const {getAll, auth} = require("./database");
 
 const app = express();
 app.use(express.json());
@@ -14,8 +14,16 @@ app.get('/', (req, res) => {
 app.get('/data', (req, res) => {
   console.log('GET: /data')
 
-  res.json(db.getAll());
+  res.json(getAll());
 });
+
+app.post('/login', (req, res) => {
+  const user = req.body;
+  const result = auth(user);
+
+  res.json(result);
+});
+
 
 
 

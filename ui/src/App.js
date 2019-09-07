@@ -4,6 +4,8 @@ import Students from "./components/Students";
 import Competencies from "./components/Competencies";
 import NotFound from "./components/NotFound";
 import CompetencyPage from "./components/CompetencyPage";
+import AdminLogin from "./components/admin/AdminLogin";
+import AdminPage from "./components/admin/AdminPage";
 
 
 class App extends Component {
@@ -16,6 +18,8 @@ class App extends Component {
             <Route exact path="/" component={Students} />
             <Route exact path="/student/:name" component={Competencies} />
             <Route exact path="/student/:name/:comp" component={CompetencyPage} />
+            <Route exact path="/login" component={AdminLogin} />
+            <Route exact path="/admin" component={AdminPage} />
             <Route component={NotFound} />
           </Switch>
         </Router>
