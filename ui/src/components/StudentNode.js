@@ -2,10 +2,35 @@ import React, { Component } from 'react';
 import PercentageCircle from './PercentageCircles/PercentageCircle';
 
 export class StudentNode extends Component {
+    getColor(percentage) {
+        return percentage < 34 ? 'orange' : percentage < 67 ? 'green' : '';
+    }
+    
+    getTotalLevel = () => {
+        let totalLevel = 0;
+
+        const totalCompLevel = this.props.comp.reduce((result, elem) => {
+            let levelsCount = 0;
+            levelsCount += elem.level.one ? 1 : 0;
+            levelsCount += elem.level.two ? 1 : 0;
+            levelsCount += elem.level.three ? 1 : 0;
+            
+            const totalLevel = Math.round((elem.level.one + elem.level.two + elem.level.three) / levelsCount)
+            
+            console.log('elem', totalLevel);
+            console.log('__________________');
+            return result + totalLevel;
+        }, 0)
+        
+        totalLevel = Math.floor(totalCompLevel / this.props.comp.length);
+        return totalLevel;
+    }
+
     render() {
+        const {getColor, getTotalLevel} = this;
         const { student, comp } = this.props;
-        const totalLevel = 10;
-        const color = totalLevel < 34 ? 'orange' : totalLevel < 67 ? 'green' : '';
+        const totalLevel = getTotalLevel();
+        const color = getColor(totalLevel);
 
         return (
             <div className="m-1 text-center">
