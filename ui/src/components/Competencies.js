@@ -14,8 +14,6 @@ export class Competencies extends Component {
         } else {
             this.props.history.push('/');
         }
-
-        console.log(this.props);
     }
 
     render() {

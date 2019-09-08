@@ -17,8 +17,6 @@ export class StudentNode extends Component {
             
             const totalLevel = Math.round((elem.level.one + elem.level.two + elem.level.three) / levelsCount)
             
-            console.log('elem', totalLevel);
-            console.log('__________________');
             return result + totalLevel;
         }, 0)
         

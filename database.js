@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const data = require('./data');
+// const data = require('./data');
 
-mongoose.connect('mongodb://localhost/Db', { useNewUrlParser: true });
+mongoose.connect('mongodb://oca:oca1234567@ds219308.mlab.com:19308/oca-skills-tree', { useNewUrlParser: true });
+// mongoose.connect('mongodb://localhost/Db', { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.on('error', function () {

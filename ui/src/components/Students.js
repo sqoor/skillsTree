@@ -12,8 +12,6 @@ export class Students extends Component {
     componentDidMount() {
         Axios.get('/data')
             .then(res => {
-                console.log('isarray', Array.isArray(res.data));
-                console.log('data', res.data);
                 this.setState({
                     data: res.data
                 })

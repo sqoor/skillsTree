@@ -29,9 +29,7 @@ export class CompetencyPage extends Component {
             <div className="container mt-5 text-muted">
                 <div className="row">
                     <div className="col-6">
-                        <p>Competency Page</p>
-                        <p>Competency Inforamtion</p>
-                        <p>{compsRealNames[id - 1]}</p>
+                        <h3>{compsRealNames[id - 1]}</h3>
                     </div>
                     <div>
                         <p>Imitate</p>
