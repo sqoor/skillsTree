@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 
 
-app.get('/', (req, res) => {
+app.get('/test', (req, res) => {
   res.json('TEST: server is working');
 });
 
@@ -36,10 +36,10 @@ app.post('/login', (req, res) => {
 
 const path = require("path");
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, "view/build")));
+app.use(express.static(path.join(__dirname, "ui/build")));
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
-res.sendFile(path.join(__dirname + "/view/build/index.html"));
+res.sendFile(path.join(__dirname + "/ui/build/index.html"));
 });
 
 
