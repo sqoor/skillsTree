@@ -27,8 +27,8 @@ export class CompetencyNode extends Component {
 
         return (
             <div className="m-1">
-                <p>{name}</p>
                 <Link to={{ pathname: `/student/${student.name}/${name}`, state: this.props }}>
+                    <p className="text-muted">{name}</p>
                     <PercentageCircle
                         name={'total comptency score'}
                         totalLevel={totalLevel}
