@@ -9,7 +9,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "ui": "cd ./ui && npm start",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd ui && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
