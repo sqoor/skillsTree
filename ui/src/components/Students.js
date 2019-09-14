@@ -26,13 +26,15 @@ export class Students extends Component {
             <div style={divStyle}>
                 {
                     data.map(obj => (
+                        obj.student ?
                         <Link
-                            key={obj.student.name} 
+                            key={obj._id} 
                             to={{ pathname: `/student/${obj.student.name}`,
                             state: {obj, studentName: obj.student.name} }}  
                         >
                             <StudentNode {...obj} />
                         </Link>
+                        : null
                     ))
                 }
             </div>
