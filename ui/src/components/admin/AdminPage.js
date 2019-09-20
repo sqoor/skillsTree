@@ -1,118 +1,191 @@
-import React, { Component } from 'react'
-import Axios from 'axios';
-import Row from './Row';
-import AddNew from './AddNew';
+import React, { Component } from "react";
+import Axios from "axios";
+import Row from "./Row";
+import Edit from "./Edit";
+import AddNew from "./AddNew";
+import Form from "./Form";
 
 export class AdminPage extends Component {
-    state = {
-        data: [],
-        wantAddNew: false
-    }
+  state = {
+    students: [],
+    editMode: false
+  };
 
-    componentDidMount() {
-        Axios.get('/data')
-            .then(res => {
-                this.setState({ data: res.data })
-            })
-            .catch(err => console.log(err));
-    }
+  componentDidMount() {
+    Axios.get("/students")
+      .then(res => this.setState({ students: res.data }))
+      .catch(err => console.log(err));
+  }
 
-    toggleAddNew = () => {
-        console.log('toggle add new button');
-        this.setState({ wantAddNew: !this.state.wantAddNew })
-    }
+  toggleOptions = () => {
+    this.setState({ editMode: !this.state.editMode });
+  };
 
-    submitStudent = (newStudent) => {
-        console.log('submit student', newStudent)
-        Axios.post('/data', newStudent)
-            .then(res => this.setState({data: res.data}))
-            .catch(err => console.log(err));
-    }
+  addStudent = newStudent => {
+    Axios.post("/students", newStudent)
+      .then(res =>
+        this.setState({ students: [...this.state.students, res.data] })
+      )
+      .catch(err => console.log(err));
+  };
 
-    render() {
-        const { submitStudent } = this;
-        const { data, wantAddNew } = this.state;
+  deleteStudent = studentId => {
+    Axios.delete(`/students/${studentId}`)
+      .then(res => {
+        const deleteStudentId = res.data;
+        if (deleteStudentId)
+          this.setState({
+            students: this.state.students.filter(
+              student => student._id !== deleteStudentId
+            )
+          });
+        else {
+          console.log(deleteStudentId);
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
-        return (
-            <div className="container-fluid">
-                Admin Page Component
-                <div className="mt-5">
-                    <table className="table table-striped table-bordered">
-                        <caption>
-                            <button
-                                className="btn btn-outline-dark"
-                                onClick={this.toggleAddNew}
-                            >
-                                {wantAddNew ? 'Show Add New Student' : 'Hide Add New Student'}
-                            </button>
-                        </caption>
-                        <thead className="">
-                            <tr>
-                                <th scope="col" rowSpan="2">#</th>
-                                <th scope="col" rowSpan="2">Student Name</th>
-                                <th scope="col" colSpan="3">1. Format an application </th>
-                                <th scope="col" colSpan="3" >2. Produce a static and adaptable web user interface</th>
-                                <th scope="col" colSpan="3" >3. Develop a dynamic web user Interface</th>
-                                <th scope="col" colSpan="3" >4. Produce a user interface with a content management or e-commerce solution</th>
-                                <th scope="col" colSpan="3" >5. Create a database</th>
-                                <th scope="col" colSpan="3" >6. Develop data access components</th>
-                                <th scope="col" colSpan="3" >7. Develop the back-end part of a web or mobile web application</th>
-                                <th scope="col" colSpan="3" >8. Devise and implement components in a content management or e-commerce solution</th>
-                                <th scope="col" rowSpan="2">Edit</th>
-                            </tr>
-                            <tr>
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+  updateStudent = (studentId, updatedStudent) => {
+    Axios.put(`/students/${studentId}`, updatedStudent)
+      .then(res => {
+        if (res.data) this.setState({ students: res.data });
+      })
+      .catch(err => console.log(err));
+  };
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+  render() {
+    const { addStudent, updateStudent, deleteStudent } = this;
+    const { students, editMode } = this.state;
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+    return (
+      <div className="container-fluid">
+        <button
+          className="btn btn-outline-dark my-3"
+          onClick={this.toggleOptions}
+        >
+          {editMode ? "Hide Options" : "Show Options"}
+        </button>
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+        <div className="mt-5">
+          <table className="table table-striped table-bordered">
+            <caption>
+              Students Scores
+              <div
+                className="add-student my-2"
+                style={{ visibility: editMode ? "hidden" : "visible" }}
+              >
+                <Form
+                  addStudent={addStudent}
+                  title="Add Student"
+                  styleClasses="btn btn-dark"
+                  editMode={editMode}
+                />
+              </div>
+            </caption>
+            <thead>
+              <tr>
+                <th
+                  style={{ display: editMode ? "none" : "table-cell" }}
+                  scope="col"
+                  rowSpan="2"
+                >
+                  Delete
+                </th>
+                <th
+                  style={{ display: editMode ? "none" : "table-cell" }}
+                  scope="col"
+                  rowSpan="2"
+                >
+                  Update
+                </th>
+                <th scope="col" rowSpan="2">
+                  #
+                </th>
+                <th scope="col" rowSpan="2">
+                  Student Name
+                </th>
+                <th scope="col" colSpan="3">
+                  1. Format an application{" "}
+                </th>
+                <th scope="col" colSpan="3">
+                  2. Produce a static and adaptable web user interface
+                </th>
+                <th scope="col" colSpan="3">
+                  3. Develop a dynamic web user Interface
+                </th>
+                <th scope="col" colSpan="3">
+                  4. Produce a user interface with a content management or
+                  e-commerce solution
+                </th>
+                <th scope="col" colSpan="3">
+                  5. Create a database
+                </th>
+                <th scope="col" colSpan="3">
+                  6. Develop data access components
+                </th>
+                <th scope="col" colSpan="3">
+                  7. Develop the back-end part of a web or mobile web
+                  application
+                </th>
+                <th scope="col" colSpan="3">
+                  8. Devise and implement components in a content management or
+                  e-commerce solution
+                </th>
+              </tr>
+              <tr>
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
 
-                                <th scope="col">Imitate</th>
-                                <th scope="col">Adapt</th>
-                                <th scope="col">Implement</th>
-                            </tr>
-                        </thead>
-                        <tbody className="">
-                            {data.length ? 
-                                data.map((obj, i) => (
-                                    <Row
-                                        key={obj._id}
-                                        number={i + 1}
-                                        student={obj.student}
-                                        comp={obj.comp}
-                                    />))
-                                :
-                                null
-                            }
-                            <AddNew hidden={wantAddNew} submitStudent={submitStudent} />
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        )
-    }
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
+
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
+
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
+
+                <th scope="col">Imitate</th>
+                <th scope="col">Adapt</th>
+                <th scope="col">Implement</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {students.map((student, i) => {
+                return (
+                  <Row
+                    key={student._id}
+                    number={i + 1}
+                    student={student}
+                    deleteStudent={deleteStudent}
+                    updateStudent={updateStudent}
+                    editMode={editMode}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default AdminPage
+export default AdminPage;
