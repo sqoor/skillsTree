@@ -44,9 +44,10 @@ app.delete('/students/:id', async (req, res) => {
   res.json(deleteStudentId);
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const user = req.body;
-  const result = auth(user);
+  const result = await Students.auth(user);
+  console.log("SERVER RESULT", result);
 
   res.json(result);
 });
