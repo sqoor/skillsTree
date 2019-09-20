@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-// const data = require('./data');
 
-mongoose.connect('mongodb://oca:oca1234567@ds219308.mlab.com:19308/oca-skills-tree', { useNewUrlParser: true });
-// mongoose.connect('mongodb://localhost/Db', { useNewUrlParser: true });
+// mongoose.connect('mongodb://oca:oca1234567@ds219308.mlab.com:19308/oca-skills-tree', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/Db', { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.on('error', function () {
@@ -14,36 +13,82 @@ db.once('open', function () {
 });
 
 
-const StudentsSchema = new mongoose.Schema({
-  student: {
-    id: Number,
-    name: String
+const StudentSchema = new mongoose.Schema({
+  name: String,
+  comp1: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
   },
-  comp: [
-    {
-      id: Number,
-      name: String,
-      level: {
-        one: Number,
-        two: Number,
-        three: Number,
-      }
-    }
-  ]
+  comp1: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp2: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp3: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp4: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp5: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp6: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp7: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  },
+  comp8: {
+    imitate: Number,
+    adapt: Number,
+    implement: Number
+  }  
 })
 
-const Students = mongoose.model('students', StudentsSchema);
 
-const getStudents = async () => {
+const Students = mongoose.model('students', StudentSchema);
+
+const getAll = async () => {
   return await Students.find({})
 }
 
-const addStudent = async (newStudent) => {
-  const result = await Students.create(newStudent)
-  console.log('DB addStudent: result', result);
-
-  return await getStudents();
+const getOne = async (_id) => {
+  return await Students.find({_id})
 }
+
+const add = async (newStudent) => {
+  return await Students.create(newStudent)
+}
+
+const update = async (_id, updatedStudent) => {
+  const result = await Students.updateOne({ _id }, updatedStudent)
+
+  return result.n === 1 && result.nModified === 1 && result.ok === 1
+}
+
+const remove = async _id => {
+  const result = await Students.deleteOne({ _id });
+
+  return result.n === 1 && result.ok === 1 && result.deletedCount === 1;
+};
+
 
 const auth = (user) => {
   console.log('auth', user);
@@ -60,10 +105,12 @@ const auth = (user) => {
 }
 
 
-
 module.exports = {
-  getStudents,
-  addStudent,
+  add,
+  getAll,
+  getOne,
+  update,
+  remove,
   auth
 }
 

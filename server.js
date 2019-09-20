@@ -1,29 +1,47 @@
 const express = require("express");
 const cors = require("cors");
-const {getStudents, addStudent, auth} = require("./database");
-
+const Students = require("./database");
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
 
-app.get('/test', (req, res) => {
-  res.json('TEST: server is working');
+app.get('/students', async (req, res) => {
+  const students = await Students.getAll();
+
+  res.json(students);
 });
 
-app.get('/data', async (req, res) => {
-  console.log('GET: /data')
-
-  res.json(await getStudents());
+app.get('/students/:id', async (req, res) => {
+  const studentId = req.params.id;
+  const student = await Students.getOne(studentId)
+  
+  res.json(student);
 });
 
-app.post('/data', async (req, res) => {
+app.post('/students', async (req, res) => {
   const newStudent = req.body;
-  console.log('POST: /data', newStudent)
+  const addedStudent = await Students.add(newStudent);
+  
+  res.json(addedStudent);
+});
 
-  const result = await addStudent(newStudent);
+app.put('/students/:id', async (req, res) => {
+  const studentId = req.params.id;
+  const updatedStudent = req.body;
+  const isUpdated = await Students.update(studentId, updatedStudent);
+  const allStudents = isUpdated ? await Students.getAll() : null;
 
-  res.json(result);
+  res.json(allStudents);
+});
+
+app.delete('/students/:id', async (req, res) => {
+  const studentId = req.params.id;
+  const isDeleted = await Students.remove(studentId);
+  const deleteStudentId = isDeleted ? studentId : null 
+
+  res.json(deleteStudentId);
 });
 
 app.post('/login', (req, res) => {
@@ -33,11 +51,12 @@ app.post('/login', (req, res) => {
   res.json(result);
 });
 
+app.get('/test', (req, res) => {
+  res.json('TEST: server is working');
+});
 
 const path = require("path");
-// Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "ui/build")));
-// Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
 res.sendFile(path.join(__dirname + "/ui/build/index.html"));
 });
@@ -45,3 +64,5 @@ res.sendFile(path.join(__dirname + "/ui/build/index.html"));
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => console.log(`Server listening to ${PORT}`));
+
+
