@@ -1,51 +1,36 @@
-import React, { Component } from 'react'
-import Axios from 'axios';
-import { Link } from 'react-router-dom';
-import StudentNode from './StudentNode';
-import './Students.css'
+import React, { Component } from "react";
+import Axios from "axios";
+import StudentNode from "./StudentNode";
+import "./Students.css";
 
 export class Students extends Component {
-    state = {
-        data: []
-    }
+  state = {
+    students: []
+  };
 
-    componentDidMount() {
-        Axios.get('/data')
-            .then(res => {
-                this.setState({
-                    data: res.data
-                })
-            })
-            .catch(err => console.log(err))
-    }
+  componentDidMount() {
+    Axios.get("/students")
+      .then(res => this.setState({ students: res.data }))
+      .catch(err => console.log(err));
+  }
 
-    render() {
-        const { data } = this.state;
+  render() {
+    const { students } = this.state;
 
-        return (
-            <div style={divStyle}>
-                {
-                    data.map(obj => (
-                        obj.student ?
-                        <Link
-                            key={obj._id} 
-                            to={{ pathname: `/student/${obj.student.name}`,
-                            state: {obj, studentName: obj.student.name} }}  
-                        >
-                            <StudentNode {...obj} />
-                        </Link>
-                        : null
-                    ))
-                }
-            </div>
-        )
-    }
+    return (
+      <div style={divStyle}>
+        {students.map(student =>
+          student ? <StudentNode key={student._id} student={student} /> : null
+        )}
+      </div>
+    );
+  }
 }
 
-export default Students
+export default Students;
 
 const divStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gridGap: '.7%'
-}
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gridGap: ".7%"
+};
