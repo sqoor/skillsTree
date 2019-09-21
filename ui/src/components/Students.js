@@ -18,7 +18,7 @@ export class Students extends Component {
     const { students } = this.state;
 
     return (
-      <div style={divStyle}>
+      <div className="students" style={divStyle}>
         {students.map(student =>
           student ? <StudentNode key={student._id} student={student} /> : null
         )}

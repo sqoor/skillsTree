@@ -8,7 +8,7 @@ export class CompetencyPage extends Component {
     }
 
     render() {
-        const { studentName, compName, comp } = this.props.location.state;
+        const { compName, comp } = this.props.location.state;
         const { getColor } = this;
 
         return (

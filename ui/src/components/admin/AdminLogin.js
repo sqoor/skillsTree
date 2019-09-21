@@ -11,11 +11,14 @@ export class AdminLogin extends Component {
         const password = this.password.value;
 
         Axios.post('/login', {name, password})
-            .then(res => {
+            .then(async res => {
                 const authenticated = res.data;
 
-                if(authenticated)
+                if(authenticated) {
+                    await localStorage.setItem('user', JSON.stringify(authenticated))
                     this.props.history.push('/admin');
+                    console.log(localStorage.user)
+                }
             })
             .catch(err => console.log(err));
     }

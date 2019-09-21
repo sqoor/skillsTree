@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import Row from "./Row";
-import Edit from "./Edit";
-import AddNew from "./AddNew";
 import Form from "./Form";
 
 export class AdminPage extends Component {
   state = {
     students: [],
-    editMode: false
+    editMode: true
   };
 
   componentDidMount() {
@@ -64,7 +62,7 @@ export class AdminPage extends Component {
           className="btn btn-outline-dark my-3"
           onClick={this.toggleOptions}
         >
-          {editMode ? "Hide Options" : "Show Options"}
+          {editMode ? "Show Options" : "Hide Options"}
         </button>
 
         <div className="mt-5">
