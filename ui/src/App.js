@@ -19,7 +19,7 @@ class App extends Component {
             <Route exact path="/student/:name" component={Competencies} />
             <Route exact path="/student/:name/:comp" component={CompetencyPage} />
             <Route exact path="/login" component={AdminLogin} />
-            <Route exact path="/admin" component={AdminPage} />
+            <Route exact path="/mo.jouza@secret.com" component={AdminPage} />
             <Route component={NotFound} />
           </Switch>
         </Router>
