@@ -12,27 +12,27 @@ export class CompetencyPage extends Component {
         const { getColor } = this;
 
         return (
-            <div className="container mt-5 text-muted">
+            <div className="competency">
                 <div className="row">
                     <div className="col-6">
-                        <h3>{compName}</h3>
+                        <h3 className="text-muted font-weight-bold">{compName}</h3>
                     </div>
                     <div>
-                        <p>Imitate</p>
+                        <p className="text-center text-muted">Imitate</p>
                         <PercentageCircle
                             name={'level 1'}
                             totalLevel={comp.imitate}
                             size={''}
                             color={getColor(comp.imitate)}
                         />
-                        <p>Adapt</p>
+                        <p className="text-center text-muted">Adapt</p>
                         <PercentageCircle
                             name={'level 2'}
                             totalLevel={comp.adapt}
                             size={''}
                             color={getColor(comp.adapt)}
                         />
-                        <p>Implement</p>
+                        <p className="text-center text-muted">Implement</p>
                         <PercentageCircle
                             name={'level 3'}
                             totalLevel={comp.implement}

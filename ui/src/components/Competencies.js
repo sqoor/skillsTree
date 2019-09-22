@@ -19,13 +19,13 @@ export class Competencies extends Component {
     const { student } = this.state;
 
     return (
-      <div>
+      <div className="competencies">
         <div style={style.p} className="col bg-dark text-light text-center">
           <h3>{student.name}</h3>
         </div>
         <div>
           <h4 className="text-center mt-4">Competencies</h4>
-          <ul>
+          <div>
             {/* {Array.isArray(comp) ? comp.map(c => <CompetencyNode key={c.id} student={student} {...c} />) : null} */}
             <CompetencyNode
               studentName={student.name}
@@ -67,7 +67,7 @@ export class Competencies extends Component {
               comp={student.comp8}
               compName="Devise and implement components in a content management or e-commerce solution"
             />
-          </ul>
+          </div>
         </div>
       </div>
     );

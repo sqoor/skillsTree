@@ -12,7 +12,7 @@ class App extends Component {
   
   render() {
     return (
-      <div className="container-fluid mt-3">
+      <div>
         <Router>
           <Switch>
             <Route exact path="/" component={Students} />

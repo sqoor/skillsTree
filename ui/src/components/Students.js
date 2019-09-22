@@ -2,25 +2,37 @@ import React, { Component } from "react";
 import Axios from "axios";
 import StudentNode from "./StudentNode";
 import "./Students.css";
+import Loader from "./Loader";
 
 export class Students extends Component {
   state = {
-    students: []
+    students: [],
+    isLoading: true
   };
 
   componentDidMount() {
     Axios.get("/students")
-      .then(res => this.setState({ students: res.data }))
+      .then(res => this.setState({ students: res.data, isLoading: false }))
       .catch(err => console.log(err));
   }
 
   render() {
-    const { students } = this.state;
+    const { students, isLoading } = this.state;
 
     return (
-      <div className="students" style={divStyle}>
-        {students.map(student =>
-          student ? <StudentNode key={student._id} student={student} /> : null
+      <div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="students">
+          <div style={divStyle}>
+            {students.map(student =>
+              student ? (
+                <StudentNode key={student._id} student={student} />
+              ) : null
+            )}
+          </div>
+          </div>
         )}
       </div>
     );
@@ -32,5 +44,7 @@ export default Students;
 const divStyle = {
   display: "grid",
   gridTemplateColumns: "repeat(3, 1fr)",
-  gridGap: ".7%"
+  gridGap: ".7%",
+  width: "70%",
+  margin: "auto"
 };

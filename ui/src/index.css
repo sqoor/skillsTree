@@ -1,15 +1,33 @@
 .students {
-	background-image: url('https://cdn.pixabay.com/photo/2015/12/08/00/26/desk-1081708_960_720.jpg');
-	height: 100%;
+	/* background-image: url('https://images.pexels.com/photos/2539658/pexels-photo-2539658.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); */
 
+	background-image: url('https://images.pexels.com/photos/265047/pexels-photo-265047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+
+	
+	height: 100%;
   	background-position: center;
   	background-repeat: no-repeat;
-  	background-size: cover;
+	background-size: cover;
+	background-attachment: fixed;
+	padding: 30px
 }
 
 .competencies {
-
 }
+
+
+.competency {
+	/* background-image: url('https://images.pexels.com/photos/1007025/pexels-photo-1007025.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); */
+	/* background-image: url('https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); */
+	background-image: url('https://images.pexels.com/photos/316466/pexels-photo-316466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+	height: 100vh;
+  	background-position: center;
+  	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	padding: 30px
+}
+
 
 .competency {
 
