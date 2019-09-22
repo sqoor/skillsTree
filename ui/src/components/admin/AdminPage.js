@@ -64,13 +64,13 @@ export class AdminPage extends Component {
     return (
       <div className="container-fluid">
         <button
-          className="btn btn-outline-dark my-3"
+          className="btn btn-outline-danger my-3 mx-1"
           onClick={this.toggleDelete}
         >
           {deleteMode ? "Show Delete" : "Hide Delete"}
         </button>
         <button
-          className="btn btn-outline-dark my-3"
+          className="btn btn-outline-warning my-3 mx-1"
           onClick={this.toggleOptions}
         >
           {editMode ? "Show Options" : "Hide Options"}
