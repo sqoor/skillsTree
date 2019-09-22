@@ -46,7 +46,7 @@ export class StudentNode extends Component {
             state: { student }
           }}
         >
-          <p style={styles.p}>{student.name}</p>
+          <p className="text-left" style={styles.p}>{student.name}</p>
           <PercentageCircle
             name={"total comptencies score"}
             totalLevel={totalLevel}
