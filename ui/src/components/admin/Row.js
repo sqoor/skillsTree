@@ -7,14 +7,19 @@ export class Row extends Component {
     this.props.updateStudent(studentId, updatedStudent);
   };
 
+  deleteHandle = (student) => {
+    if(window.confirm(`Delete ${student.name}`))
+      this.props.deleteStudent(student._id)
+  }
+
   render() {
-    const { number, student, deleteStudent, editMode } = this.props;
+    const { number, student, editMode, deleteMode } = this.props;
 
     return (
       <tr>
-        <th style={{ display: editMode ? "none" : "table-cell" }} scope="row">
+        <th style={{ display: deleteMode ? "none" : "table-cell" }} scope="row">
           <button
-            onClick={deleteStudent.bind(this, student._id)}
+            onClick={this.deleteHandle.bind(this, student)}
             className="btn btn-danger"
           >
             Delete

@@ -6,7 +6,8 @@ import Form from "./Form";
 export class AdminPage extends Component {
   state = {
     students: [],
-    editMode: true
+    editMode: true,
+    deleteMode: true
   };
 
   componentDidMount() {
@@ -17,6 +18,10 @@ export class AdminPage extends Component {
 
   toggleOptions = () => {
     this.setState({ editMode: !this.state.editMode });
+  };
+
+  toggleDelete = () => {
+    this.setState({ deleteMode: !this.state.deleteMode });
   };
 
   addStudent = newStudent => {
@@ -54,10 +59,16 @@ export class AdminPage extends Component {
 
   render() {
     const { addStudent, updateStudent, deleteStudent } = this;
-    const { students, editMode } = this.state;
+    const { students, editMode, deleteMode } = this.state;
 
     return (
       <div className="container-fluid">
+        <button
+          className="btn btn-outline-dark my-3"
+          onClick={this.toggleDelete}
+        >
+          {deleteMode ? "Show Delete" : "Hide Delete"}
+        </button>
         <button
           className="btn btn-outline-dark my-3"
           onClick={this.toggleOptions}
@@ -84,7 +95,7 @@ export class AdminPage extends Component {
             <thead>
               <tr>
                 <th
-                  style={{ display: editMode ? "none" : "table-cell" }}
+                  style={{ display: deleteMode ? "none" : "table-cell" }}
                   scope="col"
                   rowSpan="2"
                 >
@@ -175,6 +186,7 @@ export class AdminPage extends Component {
                     deleteStudent={deleteStudent}
                     updateStudent={updateStudent}
                     editMode={editMode}
+                    deleteMode={deleteMode}
                   />
                 );
               })}
