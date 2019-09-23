@@ -92,7 +92,7 @@ export class AdminPage extends Component {
                 />
               </div>
             </caption>
-            <thead>
+            <thead className="thead_sticky">
               <tr>
                 <th
                   style={{ display: deleteMode ? "none" : "table-cell" }}
