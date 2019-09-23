@@ -12,7 +12,11 @@ export class Students extends Component {
 
   componentDidMount() {
     Axios.get("/students")
-      .then(res => this.setState({ students: res.data, isLoading: false }))
+      .then(res => {
+        setTimeout(() => {
+          this.setState({ students: res.data, isLoading: false })
+        }, 3000);
+      })
       .catch(err => console.log(err));
   }
 
